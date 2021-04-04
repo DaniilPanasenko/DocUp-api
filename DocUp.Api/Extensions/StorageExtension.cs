@@ -1,4 +1,6 @@
 ﻿using System;
+using DocUp.Dal.Storages;
+using DocUp.Dal.Storages.Impl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DocUp.Api.Extensions
@@ -13,6 +15,8 @@ namespace DocUp.Api.Extensions
         public static IServiceCollection AddStorages(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.AddTransient<IAccountStorage, AccountStorage>();
 
             return services;
         }

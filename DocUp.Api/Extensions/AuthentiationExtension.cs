@@ -1,5 +1,9 @@
 ﻿using System;
+using DocUp.Api.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DocUp.Api.Extensions
 {
@@ -13,7 +17,7 @@ namespace DocUp.Api.Extensions
         public static IServiceCollection AddAuthentications(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            /*
+            
             services.AddOptions<JwtOptions>();
             var jwtOptions = services
                 .BuildServiceProvider()
@@ -38,7 +42,7 @@ namespace DocUp.Api.Extensions
                             ValidateIssuerSigningKey = true
                         };
                     });
-            */
+            
             return services;
         }
     }

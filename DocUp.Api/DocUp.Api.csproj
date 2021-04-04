@@ -14,11 +14,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Auth\" />
+    <Folder Include="Contracts\" />
+    <Folder Include="Contracts\Requests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DocUp.Bll\DocUp.Bll.csproj">

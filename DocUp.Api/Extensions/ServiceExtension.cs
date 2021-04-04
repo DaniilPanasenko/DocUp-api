@@ -1,4 +1,7 @@
 ﻿using System;
+using DocUp.Api.Auth;
+using DocUp.Bll.Services;
+using DocUp.Bll.Services.Impl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DocUp.Api.Extensions
@@ -14,6 +17,10 @@ namespace DocUp.Api.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            services.AddTransient<IAuthService, AuthService>();
+
+
+            services.AddScoped<IApplicationUser, ApplicationUser>();
 
             return services;
         }
