@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.808.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocUp.Api", "DocUp.Api\DocUp.Api.csproj", "{DC367B45-DE22-4106-BA04-7F68E442E5F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocUp.Bll", "DocUp.Bll\DocUp.Bll.csproj", "{6ED8454A-4B6D-4D3E-AF65-C2DB7EAC5340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocUp.Dal", "DocUp.Dal\DocUp.Dal.csproj", "{45A71F4F-4E81-4105-A5D7-41E4EEB8B62C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{DC367B45-DE22-4106-BA04-7F68E442E5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC367B45-DE22-4106-BA04-7F68E442E5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC367B45-DE22-4106-BA04-7F68E442E5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED8454A-4B6D-4D3E-AF65-C2DB7EAC5340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED8454A-4B6D-4D3E-AF65-C2DB7EAC5340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED8454A-4B6D-4D3E-AF65-C2DB7EAC5340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED8454A-4B6D-4D3E-AF65-C2DB7EAC5340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A71F4F-4E81-4105-A5D7-41E4EEB8B62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A71F4F-4E81-4105-A5D7-41E4EEB8B62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A71F4F-4E81-4105-A5D7-41E4EEB8B62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A71F4F-4E81-4105-A5D7-41E4EEB8B62C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
