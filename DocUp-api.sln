@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.808.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocUp", "DocUp\DocUp.csproj", "{DC367B45-DE22-4106-BA04-7F68E442E5F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocUp.Api", "DocUp.Api\DocUp.Api.csproj", "{DC367B45-DE22-4106-BA04-7F68E442E5F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
