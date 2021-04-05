@@ -3,15 +3,17 @@ using System;
 using DocUp.Dal.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DocUp.Dal.Migrations
 {
     [DbContext(typeof(DocUpContext))]
-    partial class DocUpContextModelSnapshot : ModelSnapshot
+    [Migration("20210405230533_DB3")]
+    partial class DB3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,15 +265,10 @@ namespace DocUp.Dal.Migrations
                     b.Property<DateTimeOffset>("DateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("DeviceId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Percent")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DeviceId");
 
                     b.ToTable("Readings");
                 });
@@ -393,17 +390,6 @@ namespace DocUp.Dal.Migrations
                     b.Navigation("Ilness");
 
                     b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("DocUp.Dal.Entities.ReadingEntity", b =>
-                {
-                    b.HasOne("DocUp.Dal.Entities.DeviceEntity", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Device");
                 });
 
             modelBuilder.Entity("DocUp.Dal.Entities.VisitEntity", b =>

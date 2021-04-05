@@ -9,10 +9,26 @@ namespace DocUp.Dal.Context
     {
         public DbSet<AccountEntity> Accounts { get; set; }
 
+        public DbSet<ClinicEntity> Clinics { get; set; }
+
+        public DbSet<DeviceEntity> Devices { get; set; }
+
+        public DbSet<DoctorEntity> Dooctors { get; set; }
+
+        public DbSet<IlnessEntity> Ilnesses { get; set; }
+
+        public DbSet<PatientEntity> Patients { get; set; }
+
+        public DbSet<PatientIlnessEntity> PatientIlnesses { get; set; }
+
+        public DbSet<ReadingEntity> Readings { get; set; }
+
+        public DbSet<VisitEntity> Visits { get; set; }
+
+
         public DocUpContext(DbContextOptions<DocUpContext> options)
             : base(options)
         {
-            NpgsqlConnection.ClearAllPools();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,7 +38,6 @@ namespace DocUp.Dal.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
         }
     }
 }

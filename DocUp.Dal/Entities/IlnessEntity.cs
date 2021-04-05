@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocUp.Dal.Entities
 {
-    [Table("Accounts")]
-    public class AccountEntity
+    [Table("Ilnesses")]
+    public class IlnessEntity
     {
         [Key]
         [Required]
@@ -13,19 +13,15 @@ namespace DocUp.Dal.Entities
         public int Id { get; set; }
 
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        [StringLength(64, MinimumLength = 5)]
-        public string Login { get; set; }
+        public int ClinicCall { get; set; }
 
         [Required]
-        public string PasswordHash { get; set; }
+        public int DoctorCall { get; set; }
 
         [Required]
-        public string Role { get; set; }
-
-        public bool IsBlocked { get; set; }
+        public int WatcherCall { get; set; }
     }
 }
