@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,5 +25,7 @@ namespace DocUp.Dal.Entities
 
         [ForeignKey("IlnessId")]
         public virtual IlnessEntity Ilness { get; set; }
+
+        public virtual ICollection<DeviceEntity> Devices { get; set; }
     }
 }

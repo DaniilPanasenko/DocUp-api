@@ -9,7 +9,10 @@ namespace DocUp.Bll.Helpers
         Forbidden = 403,
 
         InvalidLogin = 11,
-        InvalidPassword = 12
+        InvalidPassword = 12,
+
+        LoginAlreadyExist = 21,
+        EmailAlreadyExist = 22,
 
     }
 }

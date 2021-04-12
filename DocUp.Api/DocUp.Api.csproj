@@ -24,6 +24,9 @@
     <Folder Include="Auth\" />
     <Folder Include="Contracts\" />
     <Folder Include="Contracts\Requests\" />
+    <Folder Include="Contracts\Dtos\" />
+    <Folder Include="Contracts\ViewModels\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DocUp.Bll\DocUp.Bll.csproj">

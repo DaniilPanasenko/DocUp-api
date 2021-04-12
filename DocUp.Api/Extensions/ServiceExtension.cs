@@ -18,7 +18,7 @@ namespace DocUp.Api.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddTransient<IAuthService, AuthService>();
-
+            services.AddTransient<IAccountService, AccountService>();
 
             services.AddScoped<IApplicationUser, ApplicationUser>();
 

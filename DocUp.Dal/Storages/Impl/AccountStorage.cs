@@ -16,11 +16,20 @@ namespace DocUp.Dal.Storages.Impl
             _dbContext = dbContext;
         }
 
+        public async Task AddAccountAsync(AccountEntity account)
+        {
+            await _dbContext.Accounts.AddAsync(account);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<AccountEntity> GetByLoginAsync(string login)
         {
-            return await _dbContext.Accounts
-                .Where(account => account.Login == login)
-                .FirstOrDefaultAsync();
+            return await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Login == login);
+        }
+
+        public async Task<AccountEntity> GetByEmailAsync(string email)
+        {
+            return await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }
