@@ -6,10 +6,14 @@ namespace DocUp.Dal.Storages
 {
     public interface IAccountStorage
     {
-        Task AddAccountAsync(AccountEntity account);
+        Task AddAsync(AccountEntity account);
 
         Task<AccountEntity> GetByLoginAsync(string login);
 
         Task<AccountEntity> GetByEmailAsync(string email);
+
+        Task<AccountEntity> GetByIdAsync(int id);
+
+        Task UpdateAsync(AccountEntity account);
     }
 }

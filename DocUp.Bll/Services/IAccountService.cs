@@ -6,6 +6,16 @@ namespace DocUp.Bll.Services
 {
     public interface IAccountService
     {
-        public Task<ResultCode> AddAccountAsync(AccountModel account);
+        Task<int> GetUserIdByAccountIdAsync(int accountId, string role);
+
+        Task<ResultCode> AddAdminAsync(AccountModel account);
+
+        Task<ResultCode> AddClinicAsync(AccountModel account);
+
+        Task<ResultCode> AddDoctorAsync(AccountModel account, int clinicId);
+
+        Task<ResultCode> AddPatientAsync(AccountModel account, int doctorId);
+
+        Task<ResultCode> ChangeBlockedStatusAsync(int accountId);
     }
 }

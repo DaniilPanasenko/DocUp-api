@@ -17,6 +17,11 @@ namespace DocUp.Api.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddTransient<IAccountStorage, AccountStorage>();
+            services.AddTransient<IDeviceStorage, DeviceStorage>();
+            services.AddTransient<IIlnessStorage, IlnessStorage>();
+            services.AddTransient<IDoctorStorage, DoctorStorage>();
+            services.AddTransient<IPatientStorage, PatientStorage>();
+            services.AddTransient<IClinicStorage, ClinicStorage>();
 
             return services;
         }

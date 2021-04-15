@@ -50,5 +50,7 @@ namespace DocUp.Dal.Entities
         public virtual DoctorEntity Doctor { get; set; }
 
         public virtual ICollection<PatientIlnessEntity> Ilnesses { get; set; }
+
+        public virtual ICollection<DeviceEntity> Devices { get; set; }
     }
 }

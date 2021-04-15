@@ -25,7 +25,5 @@ namespace DocUp.Dal.Entities
 
         [ForeignKey("IlnessId")]
         public virtual IlnessEntity Ilness { get; set; }
-
-        public virtual ICollection<DeviceEntity> Devices { get; set; }
     }
 }

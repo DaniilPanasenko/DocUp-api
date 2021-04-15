@@ -19,6 +19,8 @@ namespace DocUp.Api.Extensions
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IIlnessService, IlnessService>();
+            services.AddTransient<IDeviceService, DeviceService>();
 
             services.AddScoped<IApplicationUser, ApplicationUser>();
 

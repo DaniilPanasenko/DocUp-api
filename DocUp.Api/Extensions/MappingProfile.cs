@@ -12,13 +12,16 @@ namespace DocUp.Api.Extensions
         public MappingProfile()
         {
             CreateMap<AccountEntity, AccountModel>().ReverseMap();
-
+            CreateMap<IlnessEntity, IlnessModel>().ReverseMap();
+            CreateMap<DeviceEntity, DeviceModel>().ReverseMap();
 
 
             CreateMap<AccountDto, AccountModel>()
                 .ForMember(x => x.PasswordHash, y => y
                       .MapFrom(z => PasswordHash
                             .CreateHash(z.Password)));
+            CreateMap<IlnessDto, IlnessModel>().ReverseMap();
+            CreateMap<DeviceDto, DeviceModel>().ReverseMap();
         }
     }
 }
