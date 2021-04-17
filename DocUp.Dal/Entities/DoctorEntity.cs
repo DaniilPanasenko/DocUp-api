@@ -28,7 +28,6 @@ namespace DocUp.Dal.Entities
         [MaxLength(64)]
         public string Position { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string PhoneNumber { get; set; }
 

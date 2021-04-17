@@ -21,12 +21,12 @@ namespace DocUp.Dal.Storages.Impl
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<ClinicEntity> GetByAccountId(int accountId)
+        public async Task<ClinicEntity> GetByAccountIdAsync(int accountId)
         {
             return await _dbContext.Clinics.FirstOrDefaultAsync(x => x.AccountId == accountId);
         }
 
-        public async Task<ClinicEntity> GetByClinicId(int clinicId)
+        public async Task<ClinicEntity> GetByClinicIdAsync(int clinicId)
         {
             return await _dbContext.Clinics
                 .Include(x=>x.Account)

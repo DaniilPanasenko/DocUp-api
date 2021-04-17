@@ -25,11 +25,9 @@ namespace DocUp.Dal.Entities
         [MaxLength(64)]
         public string Surname { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string PhoneNumber { get; set; }
 
-        [Required]
         [MaxLength(512)]
         public string Address { get; set; }
 
@@ -41,7 +39,6 @@ namespace DocUp.Dal.Entities
         [MaxLength(64)]
         public string WatcherSurname { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string WatcherPhoneNumber { get; set; }
 

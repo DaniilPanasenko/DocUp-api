@@ -41,7 +41,7 @@ namespace DocUp.Bll
                 var patient = reading.Device.PatientIlness.Patient;
 
                 if (percent > ilness.WatcherCall &&
-                    _notificationsBus.HasRecipientNotificationDueTime(
+                    !_notificationsBus.HasRecipientNotificationDueTime(
                         patient.WatcherPhoneNumber,
                         patient.Id,
                         reading.DateTime - spamTime))
@@ -59,7 +59,7 @@ namespace DocUp.Bll
                 }
 
                 if (percent > ilness.WatcherCall &&
-                    _notificationsBus.HasRecipientNotificationDueTime(
+                    !_notificationsBus.HasRecipientNotificationDueTime(
                         patient.Doctor.PhoneNumber,
                         patient.Id,
                         reading.DateTime - spamTime))
@@ -77,7 +77,7 @@ namespace DocUp.Bll
                 }
 
                 if(percent > ilness.WatcherCall &&
-                    _notificationsBus.HasRecipientNotificationDueTime(
+                    !_notificationsBus.HasRecipientNotificationDueTime(
                         patient.Doctor.Clinic.PhoneNumber,
                         patient.Id,
                         reading.DateTime - spamTime))

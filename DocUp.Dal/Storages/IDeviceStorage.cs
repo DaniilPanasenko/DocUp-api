@@ -21,6 +21,6 @@ namespace DocUp.Dal.Storages
 
         Task<List<ReadingEntity>> GetDataDueTimeAsync(DateTimeOffset time);
 
-        Task<bool> PatientHasIlnessByDeviceSeria(int userId, int seria);
+        Task<bool> PatientHasIlnessByDeviceSeriaAsync(int userId, int seria);
     }
 }

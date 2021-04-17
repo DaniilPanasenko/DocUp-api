@@ -45,10 +45,6 @@ namespace DocUp.Bll.Services.Impl
             {
                 return ResultCode.NotFound;
             }
-            if (await _deviceStorage.HaveUserAsync(data.Seria))
-            {
-                return ResultCode.DeviceAlreadyHaveUser;
-            }
 
             var deviceId = await _deviceStorage.GetIdBySeriaAsync(data.Seria);
             data.DeviceId = deviceId;
@@ -70,7 +66,7 @@ namespace DocUp.Bll.Services.Impl
             {
                 return ResultCode.DeviceAlreadyHaveUser;
             }
-            if (!await _deviceStorage.PatientHasIlnessByDeviceSeria(userId, seria))
+            if (!await _deviceStorage.PatientHasIlnessByDeviceSeriaAsync(userId, seria))
             {
                 return ResultCode.NotFound;
             }

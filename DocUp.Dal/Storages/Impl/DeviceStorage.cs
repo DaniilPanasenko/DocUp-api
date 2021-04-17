@@ -33,10 +33,10 @@ namespace DocUp.Dal.Storages.Impl
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> PatientHasIlnessByDeviceSeria(int userId, int seria)
+        public async Task<bool> PatientHasIlnessByDeviceSeriaAsync(int userId, int seria)
         {
             var device = await _dbContext.Devices.FirstAsync(x => x.Seria == seria);
-            return await _dbContext.PatientIlnesses.AnyAsync(x => x.PatientId == userId && x.IlnessId == device.Id);
+            return await _dbContext.PatientIlnesses.AnyAsync(x => x.PatientId == userId && x.IlnessId == device.IlnessId);
         }
 
         public async Task AddReadingAsync(ReadingEntity reading)

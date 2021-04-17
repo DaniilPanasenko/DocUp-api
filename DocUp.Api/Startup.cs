@@ -63,7 +63,7 @@ namespace DocUp.Api
                 .AllowAnyHeader()
                 .WithExposedHeaders("Authorization", "Accept", "Content-Type", "Origin"));
 
-            app.UseMiddleware<LoggingMiddleware>();
+            //app.UseMiddleware<LoggingMiddleware>();
 
             app.UseHttpsRedirection();
 

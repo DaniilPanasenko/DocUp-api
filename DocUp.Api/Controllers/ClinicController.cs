@@ -39,7 +39,7 @@ namespace DocUp.Api.Controllers
             _clinicService = clinicService;
         }
 
-        private int UserId => _accountService.GetUserIdByAccountIdAsync(_applicationUser.Id, _applicationUser.Role).Result;
+        private async Task<int> UserId() => await _accountService.GetUserIdByAccountIdAsync(_applicationUser.Id, _applicationUser.Role);
 
         [HttpPost("doctor")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -50,8 +50,7 @@ namespace DocUp.Api.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var accountModel = _mapper.Map<AccountDto, AccountModel>(account);
-
-            var result = await _accountService.AddDoctorAsync(accountModel, UserId);
+            var result = await _accountService.AddDoctorAsync(accountModel, await UserId());
 
             if (result != ResultCode.Success)
             {
@@ -65,7 +64,7 @@ namespace DocUp.Api.Controllers
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult> GetInfoAsync()
         {
-            var result = await _clinicService.GetInfoAsync(UserId);
+            var result = await _clinicService.GetInfoAsync(await UserId());
 
             if (result.Code == ResultCode.NotFound)
             {
@@ -82,7 +81,7 @@ namespace DocUp.Api.Controllers
         public async Task<ActionResult> UpdateInfoAsync(ClinicDto clinic)
         {
             var model = _mapper.Map<ClinicDto, ClinicModel>(clinic);
-            model.Id = UserId;
+            model.Id = await UserId();
 
             var result = await _clinicService.UpdateAsync(model);
             return StatusCode((int)result);

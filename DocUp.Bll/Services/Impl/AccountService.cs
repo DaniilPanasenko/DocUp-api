@@ -34,11 +34,11 @@ namespace DocUp.Bll.Services.Impl
         {
             if (role == "clinic")
             {
-                return (await _clinicStorage.GetByAccountId(accountId)).Id;
+                return (await _clinicStorage.GetByAccountIdAsync(accountId)).Id;
             }
             if (role == "doctor")
             {
-                return (await _doctorStorage.GetByAccountId(accountId)).Id;
+                return (await _doctorStorage.GetByAccountIdAsync(accountId)).Id;
             }
             if (role == "patient")
             {
@@ -50,13 +50,21 @@ namespace DocUp.Bll.Services.Impl
         public async Task<ResultCode> AddAdminAsync(AccountModel account)
         {
             account.Role = "admin";
-            return await AddAccountAsync(account);
+            return (await AddAccountAsync(account)).Code;
         }
 
         public async Task<ResultCode> AddClinicAsync(AccountModel account)
         {
             account.Role = "clinic";
-            return await AddAccountAsync(account);
+            var result = await AddAccountAsync(account);
+
+            if (result.Code != ResultCode.Success)
+            {
+                return result.Code;
+            }
+
+            await _clinicStorage.AddAsync(result.Value.Id);
+            return ResultCode.Success;
         }
 
         public async Task<ResultCode> AddDoctorAsync(AccountModel account, int clinicId)
@@ -64,12 +72,12 @@ namespace DocUp.Bll.Services.Impl
             account.Role = "doctor";
             var result = await AddAccountAsync(account);
 
-            if (result != ResultCode.Success)
+            if (result.Code != ResultCode.Success)
             {
-                return result;
+                return result.Code;
             }
 
-            await _doctorStorage.AddAsync(account.Id, clinicId);
+            await _doctorStorage.AddAsync(result.Value.Id, clinicId);
             return ResultCode.Success;
         }
 
@@ -78,12 +86,12 @@ namespace DocUp.Bll.Services.Impl
             account.Role = "patient";
             var result = await AddAccountAsync(account);
 
-            if (result != ResultCode.Success)
+            if (result.Code != ResultCode.Success)
             {
-                return result;
+                return result.Code;
             }
 
-            await _patientStorage.AddAsync(account.Id, doctorId);
+            await _patientStorage.AddAsync(result.Value.Id, doctorId);
             return ResultCode.Success;
         }
 
@@ -99,23 +107,23 @@ namespace DocUp.Bll.Services.Impl
             return ResultCode.Success;
         }
 
-        private async Task<ResultCode> AddAccountAsync(AccountModel account)
+        private async Task<Result<AccountEntity>> AddAccountAsync(AccountModel account)
         {
             if (await _accountStorage.GetByEmailAsync(account.Email) != null)
             {
-                return ResultCode.EmailAlreadyExist;
+                return new Result<AccountEntity>(ResultCode.EmailAlreadyExist);
             }
 
             if (await _accountStorage.GetByLoginAsync(account.Login) != null)
             {
-                return ResultCode.LoginAlreadyExist;
+                return new Result<AccountEntity>(ResultCode.LoginAlreadyExist);
             }
 
             var accountEntity = _mapper.Map<AccountModel, AccountEntity>(account);
 
             await _accountStorage.AddAsync(accountEntity);
 
-            return ResultCode.Success;
+            return new Result<AccountEntity>(accountEntity);
         }
     }
 }
