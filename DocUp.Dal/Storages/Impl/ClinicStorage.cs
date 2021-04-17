@@ -1,23 +1,43 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DocUp.Dal.Context;
 using DocUp.Dal.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DocUp.Dal.Storages.Impl
 {
     public class ClinicStorage : IClinicStorage
     {
-        public ClinicStorage()
+        private readonly DocUpContext _dbContext;
+
+        public ClinicStorage(DocUpContext dbContext)
         {
+            _dbContext = dbContext;
         }
 
-        public Task AddAsync(int accountId)
+        public async Task AddAsync(int accountId)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(new ClinicEntity { AccountId = accountId });
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<ClinicEntity> GetByAccountId(int accountId)
+        public async Task<ClinicEntity> GetByAccountId(int accountId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Clinics.FirstOrDefaultAsync(x => x.AccountId == accountId);
+        }
+
+        public async Task<ClinicEntity> GetByClinicId(int clinicId)
+        {
+            return await _dbContext.Clinics
+                .Include(x=>x.Account)
+                .Include(x=>x.Doctors)
+                .FirstOrDefaultAsync(x => x.Id == clinicId);
+        }
+
+        public async Task UpdateAsync(ClinicEntity clinic)
+        {
+            _dbContext.Update(clinic);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

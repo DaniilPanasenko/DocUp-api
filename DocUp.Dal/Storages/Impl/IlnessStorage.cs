@@ -1,29 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using DocUp.Dal.Context;
 using DocUp.Dal.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DocUp.Dal.Storages.Impl
 {
     public class IlnessStorage : IIlnessStorage
     {
-        public IlnessStorage()
+        private readonly DocUpContext _dbContext;
+
+        public IlnessStorage(DocUpContext dbContext)
         {
+            _dbContext = dbContext;
         }
 
-        public Task AddAsync(IlnessEntity ilness)
+        public async Task AddAsync(IlnessEntity ilness)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(ilness);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<bool> ExistAsync(int ilnessId)
+        public async Task<bool> ExistAsync(int ilnessId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Ilnesses.AnyAsync(x => x.Id == ilnessId);
         }
 
-        public Task<List<IlnessEntity>> GetIlnessListAsync()
+        public async Task<List<IlnessEntity>> GetIlnessListAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Ilnesses.ToListAsync();
         }
     }
 }

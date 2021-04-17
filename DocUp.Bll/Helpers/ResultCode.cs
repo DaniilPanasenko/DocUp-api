@@ -13,8 +13,12 @@ namespace DocUp.Bll.Helpers
 
         LoginAlreadyExist = 21,
         EmailAlreadyExist = 22,
+        UserBlocked = 23,
 
-        DeviceSeriaAlreadyExst = 31
+        DeviceSeriaAlreadyExst = 31,
+        DeviceAlreadyHaveUser = 32,
+
+        UserAlreadyHasIlness = 41
 
     }
 }

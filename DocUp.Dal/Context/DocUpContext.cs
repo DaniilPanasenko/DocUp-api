@@ -13,7 +13,7 @@ namespace DocUp.Dal.Context
 
         public DbSet<DeviceEntity> Devices { get; set; }
 
-        public DbSet<DoctorEntity> Dooctors { get; set; }
+        public DbSet<DoctorEntity> Doctors { get; set; }
 
         public DbSet<IlnessEntity> Ilnesses { get; set; }
 

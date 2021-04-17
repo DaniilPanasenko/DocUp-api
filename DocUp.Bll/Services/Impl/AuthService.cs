@@ -30,6 +30,11 @@ namespace DocUp.Bll.Services.Impl
                 return new Result<AccountModel>(ResultCode.InvalidLogin);
             }
 
+            if (user.IsBlocked)
+            {
+                return new Result<AccountModel>(ResultCode.UserBlocked);
+            }
+
             var passwordIsValid = PasswordHash.ValidatePassword(password, user.PasswordHash);
 
             return !passwordIsValid

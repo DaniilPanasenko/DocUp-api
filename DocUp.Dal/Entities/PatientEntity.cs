@@ -33,6 +33,8 @@ namespace DocUp.Dal.Entities
         [MaxLength(512)]
         public string Address { get; set; }
 
+        public int Age { get; set; }
+
         [MaxLength(64)]
         public string WatcherName { get; set; }
 
@@ -51,6 +53,5 @@ namespace DocUp.Dal.Entities
 
         public virtual ICollection<PatientIlnessEntity> Ilnesses { get; set; }
 
-        public virtual ICollection<DeviceEntity> Devices { get; set; }
     }
 }

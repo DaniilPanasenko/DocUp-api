@@ -35,6 +35,7 @@ namespace DocUp.Api
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
 
+            services.AddHostedService<ReadingsHostedService>();
             services.AddSwagger();
             services.AddAuthentications();
             services.AddDbContexts(Configuration);

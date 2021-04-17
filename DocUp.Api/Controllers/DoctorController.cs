@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DocUp.Api.Auth;
 using DocUp.Api.Contracts.Dtos;
+using DocUp.Api.Contracts.ViewModels;
 using DocUp.Bll.Helpers;
 using DocUp.Bll.Models;
 using DocUp.Bll.Services;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DocUp.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/doctor/{doctorId}")]
+    [Route("api/v1/doctor")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -24,15 +25,18 @@ namespace DocUp.Api.Controllers
         private readonly IAccountService _accountService;
         private readonly IMapper _mapper;
         private readonly IApplicationUser _applicationUser;
+        private readonly IDoctorService _doctorService;
 
         public DoctorController(
             IAccountService accountService,
             IMapper mapper,
-            IApplicationUser applicationUser)
+            IApplicationUser applicationUser,
+            IDoctorService doctorService)
         {
             _accountService = accountService;
             _mapper = mapper;
             _applicationUser = applicationUser;
+            _doctorService = doctorService;
         }
 
         private int UserId => _accountService.GetUserIdByAccountIdAsync(_applicationUser.Id, _applicationUser.Role).Result;
@@ -57,27 +61,31 @@ namespace DocUp.Api.Controllers
         }
 
         [HttpGet("info")]
-        public async Task<ActionResult> GetInfoAsync(string clinicId)
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult> GetInfoAsync()
         {
-            throw new NotImplementedException();
+            var result = await _doctorService.GetInfoAsync(UserId);
+
+            if (result.Code == ResultCode.NotFound)
+            {
+                return NotFound();
+            }
+
+            var info = _mapper.Map<DoctorModel, DoctorVm>(result.Value);
+            return Ok(info);
         }
 
         [HttpPut("info")]
-        public async Task<ActionResult> UpdateDoctorInfoAsync()//TODO:ClinicDto
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult> UpdateInfoAsync(DoctorDto doctor)
         {
-            throw new NotImplementedException();
-        }
+            var model = _mapper.Map<DoctorDto, DoctorModel>(doctor);
+            model.Id = UserId;
 
-        [HttpGet("patients")]
-        public async Task<ActionResult> GetPatientsAsync(string clinicId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("patients_queue")]
-        public async Task<ActionResult> GetPatientsQueueAsync(string clinicId)
-        {
-            throw new NotImplementedException();
+            var result = await _doctorService.UpdateAsync(model);
+            return StatusCode((int)result);
         }
     }
 }

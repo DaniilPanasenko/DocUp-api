@@ -9,5 +9,9 @@ namespace DocUp.Dal.Storages
         Task AddAsync(int accountId, int clinicId);
 
         Task<DoctorEntity> GetByAccountId(int accountId);
+
+        Task<DoctorEntity> GetByDoctorId(int doctorId);
+
+        Task UpdateAsync(DoctorEntity doctor);
     }
 }

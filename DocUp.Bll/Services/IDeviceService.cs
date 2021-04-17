@@ -8,5 +8,9 @@ namespace DocUp.Bll.Services
     public interface IDeviceService
     {
         Task<ResultCode> AddAsync(DeviceModel device);
+
+        Task<ResultCode> ConnectToUserAsync(int userId, int seria);
+
+        Task<ResultCode> AddDataAsync(DeviceDataModel data);
     }
 }

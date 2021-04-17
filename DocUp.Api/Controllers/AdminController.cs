@@ -37,7 +37,14 @@ namespace DocUp.Api.Controllers
             _deviceService = deviceService;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="account"></param>
+        /// <response code="200">Product created</response>
+/// <response code="400">Product has missing/invalid values</response>
+/// <response code="500">Oops! Can't create your product right now</response>
+        /// <returns></returns>
         [HttpPost("admin")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]

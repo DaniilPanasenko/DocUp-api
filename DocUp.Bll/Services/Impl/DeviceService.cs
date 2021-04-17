@@ -38,5 +38,44 @@ namespace DocUp.Bll.Services.Impl
             await _deviceStorage.AddAsync(entity);
             return ResultCode.Success;
         }
+
+        public async Task<ResultCode> AddDataAsync(DeviceDataModel data)
+        {
+            if (!await _deviceStorage.ExistAsync(data.Seria))
+            {
+                return ResultCode.NotFound;
+            }
+            if (await _deviceStorage.HaveUserAsync(data.Seria))
+            {
+                return ResultCode.DeviceAlreadyHaveUser;
+            }
+
+            var deviceId = await _deviceStorage.GetIdBySeriaAsync(data.Seria);
+            data.DeviceId = deviceId;
+
+            var entity = _mapper.Map<DeviceDataModel, ReadingEntity>(data);
+
+            await _deviceStorage.AddReadingAsync(entity);
+
+            return ResultCode.Success;
+        }
+
+        public async Task<ResultCode> ConnectToUserAsync(int userId, int seria)
+        {
+            if (!await _deviceStorage.ExistAsync(seria))
+            {
+                return ResultCode.NotFound;
+            }
+            if (await _deviceStorage.HaveUserAsync(seria))
+            {
+                return ResultCode.DeviceAlreadyHaveUser;
+            }
+            if (!await _deviceStorage.PatientHasIlnessByDeviceSeria(userId, seria))
+            {
+                return ResultCode.NotFound;
+            }
+            await _deviceStorage.AddDeviceToUserAsync(userId, seria);
+            return ResultCode.Success;
+        }
     }
 }

@@ -25,7 +25,6 @@ namespace DocUp.Dal.Entities
         [MaxLength(512)]
         public string Place { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string PhoneNumber { get; set; }
 

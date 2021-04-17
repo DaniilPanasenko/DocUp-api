@@ -42,7 +42,7 @@ namespace DocUp.Bll.Services.Impl
             }
             if (role == "patient")
             {
-                return (await _patientStorage.GetByAccountId(accountId)).Id;
+                return (await _patientStorage.GetByAccountIdAsync(accountId)).Id;
             }
             else return -1;
         }

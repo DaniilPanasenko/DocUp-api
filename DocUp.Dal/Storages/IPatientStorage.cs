@@ -8,6 +8,14 @@ namespace DocUp.Dal.Storages
     {
         Task AddAsync(int accountId, int doctorId);
 
-        Task<PatientEntity> GetByAccountId(int accountId);
+        Task<PatientEntity> GetByAccountIdAsync(int accountId);
+
+        Task UpdateAsync(PatientEntity patient);
+
+        Task<PatientEntity> GetByPatientIdAsync(int patientId);
+
+        Task AddIlnessAsync(int patientId, int ilnessId);
+
+        Task<bool> HasIlnessAsync(int patientId, int ilnessId);
     }
 }
