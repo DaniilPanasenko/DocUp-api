@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DocUp.Dal.Entities;
 
@@ -17,5 +18,8 @@ namespace DocUp.Dal.Storages
         Task AddIlnessAsync(int patientId, int ilnessId);
 
         Task<bool> HasIlnessAsync(int patientId, int ilnessId);
+
+        Task<List<PatientEntity>> GetListByDoctorId(int doctorId);
+
     }
 }

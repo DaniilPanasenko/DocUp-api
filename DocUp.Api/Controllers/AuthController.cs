@@ -36,6 +36,8 @@ namespace DocUp.Api.Controllers
             _applicationUser = applicationUser;
         }
 
+        private int UserId => _applicationUser.Id;
+
         [HttpPost("login")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
@@ -50,11 +52,16 @@ namespace DocUp.Api.Controllers
             {
                 return Conflict(result.Code);
             }
-            return BuildToken(result.Value);
+            return Ok(new 
+            {
+                Token = BuildToken(result.Value),
+                Login = result.Value.Login,
+                Role = result.Value.Role
+            });
         }
 
         #region Methods for Jwt
-        private ActionResult BuildToken(AccountModel user)
+        private string BuildToken(AccountModel user)
         {
             var identity = GetClaimsIdentity(user.Id, user.Role);
 
@@ -69,7 +76,7 @@ namespace DocUp.Api.Controllers
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
-            return Ok(encodedJwt);
+            return encodedJwt;
         }
 
         private static ClaimsIdentity GetClaimsIdentity(int userId, string role)

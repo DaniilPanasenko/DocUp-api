@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DocUp.Dal.Context;
 using DocUp.Dal.Entities;
@@ -33,6 +35,16 @@ namespace DocUp.Dal.Storages.Impl
                 .Include(x => x.Patients)
                 .Include(x=>x.Clinic)
                 .FirstOrDefaultAsync(x => x.Id == doctorId);
+        }
+
+        public Task<List<DoctorEntity>> GetListByClinicId(int clinicId)
+        {
+           return _dbContext.Doctors
+                .Include(x => x.Account)
+                .Include(x => x.Patients)
+                .Include(x => x.Clinic)
+                .Where(x=>x.ClinicId==clinicId)
+                .ToListAsync();
         }
 
         public async Task UpdateAsync(DoctorEntity doctor)

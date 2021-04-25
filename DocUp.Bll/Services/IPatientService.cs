@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DocUp.Bll.Helpers;
 using DocUp.Bll.Models;
@@ -12,5 +13,7 @@ namespace DocUp.Bll.Services
         Task<ResultCode> UpdateAsync(PatientModel patient);
 
         Task<ResultCode> AddIlnessAsync(int patientId, int ilnessId);
+
+        Task<List<PatientModel>> GetListByDoctorIdAsync(int userId);
     }
 }

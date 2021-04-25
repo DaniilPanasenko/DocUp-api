@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DocUp.Dal.Entities;
 
@@ -13,5 +14,7 @@ namespace DocUp.Dal.Storages
         Task<DoctorEntity> GetByDoctorIdAsync(int doctorId);
 
         Task UpdateAsync(DoctorEntity doctor);
+
+        Task<List<DoctorEntity>> GetListByClinicId(int clinicId);
     }
 }

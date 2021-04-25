@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using DocUp.Bll.Helpers;
@@ -50,6 +51,12 @@ namespace DocUp.Bll.Services.Impl
         public async Task<ResultCode> AddAdminAsync(AccountModel account)
         {
             account.Role = "admin";
+            return (await AddAccountAsync(account)).Code;
+        }
+
+        public async Task<ResultCode> AddOperatorAsync(AccountModel account)
+        {
+            account.Role = "operator";
             return (await AddAccountAsync(account)).Code;
         }
 
@@ -124,6 +131,12 @@ namespace DocUp.Bll.Services.Impl
             await _accountStorage.AddAsync(accountEntity);
 
             return new Result<AccountEntity>(accountEntity);
+        }
+
+        public async Task<List<AccountModel>> GetAllAccountsAsync()
+        {
+            var users = await _accountStorage.GetAllAsync();
+            return _mapper.Map<List<AccountEntity>, List<AccountModel>>(users);
         }
     }
 }

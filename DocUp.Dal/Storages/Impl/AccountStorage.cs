@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DocUp.Dal.Context;
@@ -41,6 +42,11 @@ namespace DocUp.Dal.Storages.Impl
         {
             _dbContext.Update(account);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<AccountEntity>> GetAllAsync()
+        {
+            return await _dbContext.Accounts.OrderBy(x => x.Id).ToListAsync();
         }
     }
 }

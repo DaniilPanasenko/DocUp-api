@@ -76,6 +76,25 @@ namespace DocUp.Api.Controllers
             return Ok();
         }
 
+        [HttpPost("operator")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.Conflict)]
+        public async Task<ActionResult> AddOperatorAsync(AccountDto account)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var accountModel = _mapper.Map<AccountDto, AccountModel>(account);
+
+            var result = await _accountService.AddOperatorAsync(accountModel);
+
+            if (result != ResultCode.Success)
+            {
+                return Conflict((int)result);
+            }
+            return Ok();
+        }
+
         [HttpPatch("blocked_status/{userId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -113,6 +132,11 @@ namespace DocUp.Api.Controllers
             else return Conflict((int)result);
         }
 
-        //TODO: data export / import
+        [HttpGet("users")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult> GetAllUsers()
+        {
+            return Ok(await _accountService.GetAllAccountsAsync());
+        }
     }
 }

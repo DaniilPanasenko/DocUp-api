@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DocUp.Dal.Entities;
 
@@ -15,5 +16,7 @@ namespace DocUp.Dal.Storages
         Task<AccountEntity> GetByIdAsync(int id);
 
         Task UpdateAsync(AccountEntity account);
+
+        Task<List<AccountEntity>> GetAllAsync();
     }
 }

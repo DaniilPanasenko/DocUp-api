@@ -40,7 +40,7 @@ namespace DocUp.Api.Extensions
                 .ForMember(x => x.Login, y => y
                       .MapFrom(z => z.Account.Login))
                 .ForMember(x => x.DoctorName, y => y
-                      .MapFrom(z => z.Doctor.Name));
+                      .MapFrom(z => z.Doctor.Name+" "+z.Doctor.Surname));
 
 
 

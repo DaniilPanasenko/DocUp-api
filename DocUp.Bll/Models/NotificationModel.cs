@@ -28,12 +28,12 @@ namespace DocUp.Bll.Models
         public bool Processed { get; set; }
 
         public string Message =>
-            $"Time: {DateTime}\n" +
-            $"Phone: {Phone}\n" +
-            $"Call resipient: {Recipient}\n"+
-            $"Patient: {Patient.Name} {Patient.Surname} {Patient.Age} y.o.\n" +
-            $"Ilness: {Ilness.Name}\n" +
-            $"Condition patient: {Percent}%\n" +
+            $"Time: {DateTime}<br>" +
+            $"Phone: {Phone}<br>" +
+            $"Call resipient: {Recipient}<br>" +
+            $"Patient: {Patient.Name} {Patient.Surname} {Patient.Age} y.o.<br>" +
+            $"Ilness: {Ilness.Name}<br>" +
+            $"Condition patient: {Percent}%<br>" +
             $"Address: {Patient.Address}";
     }
 }

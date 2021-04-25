@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace DocUp.Api.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IClinicService _clinicService;
+        private readonly IDoctorService _doctorService;
         private readonly IMapper _mapper;
         private readonly IApplicationUser _applicationUser;
 
@@ -31,12 +33,14 @@ namespace DocUp.Api.Controllers
             IAccountService accountService,
             IMapper mapper,
             IApplicationUser applicationUser,
-            IClinicService clinicService)
+            IClinicService clinicService,
+            IDoctorService doctorService)
         {
             _accountService = accountService;
             _mapper = mapper;
             _applicationUser = applicationUser;
             _clinicService = clinicService;
+            _doctorService = doctorService;
         }
 
         private async Task<int> UserId() => await _accountService.GetUserIdByAccountIdAsync(_applicationUser.Id, _applicationUser.Role);
@@ -85,6 +89,15 @@ namespace DocUp.Api.Controllers
 
             var result = await _clinicService.UpdateAsync(model);
             return StatusCode((int)result);
+        }
+
+        [HttpGet("doctors")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult> GetDoctorsAsync()
+        {
+            var result = await _doctorService.GetListByClinicIdAsync(await UserId());
+            return Ok(_mapper.Map<List<DoctorModel>,List<DoctorVm>>(result));
         }
     }
 }

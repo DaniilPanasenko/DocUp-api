@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using DocUp.Bll.Helpers;
@@ -41,6 +42,12 @@ namespace DocUp.Bll.Services.Impl
 
             return new Result<DoctorModel>(_mapper.Map<DoctorEntity, DoctorModel>(doctor));
 
+        }
+
+        public async Task<List<DoctorModel>> GetListByClinicIdAsync(int userId)
+        {
+            var doctors = await _doctorStorage.GetListByClinicId(userId);
+            return _mapper.Map<List<DoctorEntity>, List<DoctorModel>>(doctors);
         }
 
         public async Task<ResultCode> UpdateAsync(DoctorModel doctor)

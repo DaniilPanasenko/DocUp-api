@@ -58,10 +58,10 @@ namespace DocUp.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DocUp v1"));
             }
 
-            app.UseCors(builder => builder.AllowAnyOrigin()
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .WithExposedHeaders("Authorization", "Accept", "Content-Type", "Origin"));
+                .AllowAnyHeader());
 
             //app.UseMiddleware<LoggingMiddleware>();
 
